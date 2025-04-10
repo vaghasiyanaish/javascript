@@ -181,7 +181,7 @@ function next(){
         index=arr1.length-1;
 }
 else{
-    index--;
+    index++;
 }
 display(index);
 }
@@ -190,7 +190,7 @@ function prev(){
         index=0;
     }
     else{
-        index++;
+        index--;
     }
 display(index);
 }
