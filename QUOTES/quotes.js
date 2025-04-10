@@ -200,3 +200,7 @@ function display(index){
     document.getElementById("quote").innerHTML=`"${arr1[index].quote}"`;
 document.getElementById("author").innerHTML=`-${arr1[index].author} (${arr1[index].profession})`;
 }
+function showQuot(){
+
+}
+next();
