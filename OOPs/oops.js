@@ -13,4 +13,4 @@ class person{
 let obj=new person;
 
 obj.display();
-obj.hello();
+obj.hello();    
