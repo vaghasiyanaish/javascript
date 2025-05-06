@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD operation</title>
+</head>
+<body>
+    <div align="center">
+        <h1>CRUD operation</h1>
+        <form id="formid">
+        <table border="1">
+           <tr>
+                <td>
+                    Enter your Firstname:
+                </td>
+                <td>
+                    <input type="text" id="fname" placeholder="Enter your Firstname">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter your surname:
+                </td>
+                <td>
+                    <input type="text" id="lname" placeholder="Enter your Lastname">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter your email:
+                </td>
+                <td>
+                    <input type="text" id="email" placeholder="Enter your email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter your phone number:
+                </td>
+                <td>
+                    <input type="text" id="phone" placeholder="Enter your phone number">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit">Add</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>View data</h2>
+
+    <table border="1" id="viewform">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </table>
+
+    <h2>Edit data</h2>
+    <table border="1" id="editform">
+        <tr>
+            <td>Firstname</td>
+            <td><input type="text" id="editfname"></td>
+        </tr>
+        <tr>
+            <td>Lastname</td>
+            <td><input type="text" id="editlname"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" id="editemail"></td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td><input type="text" id="editphone"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button id="updatebtn">Update</button>
+            </td>
+        </tr>
+    </table>
+
+
+
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
