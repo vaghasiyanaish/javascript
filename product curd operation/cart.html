@@ -2,115 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Edit Product</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <title>Cart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
     body {
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
-      padding: 60px;
-      animation: fadeIn 1s ease;
+      background: #f3f6fa;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
     }
 
     .container {
-      max-width: 500px;
+      max-width: 1200px;
       margin: auto;
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #34495e;
-      animation: slideIn 0.7s ease;
-    }
-
-    input, button {
+    table {
       width: 100%;
-      padding: 15px;
-      margin: 12px 0;
-      font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      transition: 0.3s ease;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
     }
 
-    .update {
-      background-color: #3498db;
+    th, td {
+      padding: 20px;
+      text-align: left;
+      font-size: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      background-color: #f5f7fa;
+      color: #2c3e50;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    td:last-child {
+      text-align: center;
+    }
+
+    .remove-btn {
+      background-color: #e53935;
       color: white;
       border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
     }
 
-    .update:hover {
-      background-color: #2980b9;
+    .remove-btn:hover {
+      background-color: #b71c1c;
     }
 
-    .delete {
-      background-color: #e74c3c;
-      color: white;
-      border: none;
+    .subtotal {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #388e3c;
     }
 
-    .delete:hover {
-      background-color: #c0392b;
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #1976d2;
+      font-weight: 500;
+      text-decoration: none;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .back-link:hover {
+      text-decoration: underline;
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(-30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      th {
+        display: none;
+      }
+
+      td {
+        padding: 12px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      td:last-child {
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <h2>🛠️ Edit Product</h2>
-    <input type="text" id="name">
-    <input type="text" id="category">
-    <input type="number" id="price">
-    <input type="number" id="quantity">
-    <button class="update" onclick="updateProduct()">Update</button>
-    <button class="delete" onclick="deleteProduct()">Delete</button>
-  </div>
+  <h1>Your Cart</h1>
+  <table border="1" id="cartTable">
+    <thead>
+      <tr>
+        <th>Name</th><th>Category</th><th>Price</th><th>Quantity</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <br>
+  <a href="index.html">Back to Products</a>
 
   <script>
-    let products = JSON.parse(localStorage.getItem('products')) || [];
-    let cartId = parseInt(localStorage.getItem('cartId'));
-    let product = products.find(p => p.id === cartId);
-
-    if (product) {
-      document.getElementById('name').value = product.name;
-      document.getElementById('category').value = product.category;
-      document.getElementById('price').value = product.price;
-      document.getElementById('quantity').value = product.quantity;
+    function renderCart() {
+      let tbody = document.querySelector('#cartTable tbody');
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      tbody.innerHTML = '';
+      cart.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.category}</td>
+          <td>${item.price}</td>
+          <td>${item.quantity}</td>
+          <td><button onclick="removeFromCart(${index})">Remove</button></td>
+        `;
+        tbody.appendChild(row);
+      });
     }
 
-    function updateProduct() {
-      product.name = document.getElementById('name').value;
-      product.category = document.getElementById('category').value;
-      product.price = document.getElementById('price').value;
-      product.quantity = document.getElementById('quantity').value;
-      localStorage.setItem('products', JSON.stringify(products));
-      alert("✅ Product updated!");
-      window.location.href = "index.html";
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1); // Remove only from cart
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
     }
 
-    function deleteProduct() {
-      let index = products.findIndex(p => p.id === cartId);
-      products.splice(index, 1);
-      localStorage.setItem('products', JSON.stringify(products));
-      alert("🗑️ Product deleted!");
-      window.location.href = "index.html";
-    }
+    renderCart();
   </script>
-
 </body>
 </html>
