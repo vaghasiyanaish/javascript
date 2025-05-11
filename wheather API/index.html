@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Api</title>
+    <style>
+        /* Dark background setup */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 60px;
+    color: #e0e0e0;
+}
+
+/* Title */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #00ffe7;
+    text-shadow: 0 0 10px #00ffe7;
+}
+
+/* Input field */
+input[type="text"] {
+    padding: 12px 20px;
+    width: 250px;
+    border-radius: 8px;
+    border: 1px solid #00ffe7;
+    background-color: #1c1c1c;
+    color: #00ffe7;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+input:focus {
+    box-shadow: 0 0 10px #00ffe7;
+}
+
+/* Button style */
+button {
+    padding: 12px 20px;
+    margin-left: 10px;
+    background-color: #00ffe7;
+    color: #000;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #0ff;
+    box-shadow: 0 0 10px #0ff;
+}
+
+/* Weather display box */
+#wheather {
+    margin-top: 40px;
+    background-color: rgba(33, 33, 33, 0.85);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 8px 20px rgba(0, 255, 231, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Main weather section */
+.current-weather {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.temperature {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.weather-description {
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+/* Weather details */
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.detail-item {
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #00ffe7;
+}
+
+.detail-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #00ffe7;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <h1>Weather App</h1>
+    <input type="text" id="cvalue" placeholder="Enter city name">
+    <br/>
+    <button id="searchButton">Get Weather</button>
+    <div id="wheather"></div>
+    
+    <script src="wheather.js"></script>
+</body>
+</html>
